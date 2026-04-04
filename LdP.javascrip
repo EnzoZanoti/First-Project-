@@ -1,19 +1,404 @@
-# First-Project-01
-//My first project developed with the help of Alura.
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard: Automação de Captação e Agendamento para Barbearias</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f4;
+            color: #292524;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .active-tab {
+            border-bottom: 2px solid #d97706;
+            color: #d97706;
+            font-weight: 600;
+        }
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #a8a29e;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen pb-12">
 
-alert('Bem-Vindo!');
+    <!-- Chosen Palette: Warm Neutrals with Amber Accent (Stone-100 bg, Stone-800 text, Amber-600 accent) -->
+    <!-- Application Structure Plan: Dashboard layout structured to directly answer the user's workflow query. It begins with an interactive macro-flow of the customer journey, dives into a tabbed interface for the specific technical steps requested (Availability to Calendar integration), provides an interactive tool selector, and concludes with quantitative business impact charts. This logical progression moves from concept to execution to justification. -->
+    <!-- Visualization & Content Choices: 1. Process Flow: CSS Grid + Unicode (Goal: Organize/Inform) -> Allows understanding of the funnel without SVG. 2. Tabbed Step-by-Step: Vanilla JS (Goal: Organize/Change) -> Breaks down the complex technical answer into digestible chunks. 3. Interactive Tool Stack: JS object mapping (Goal: Compare) -> Helps user choose the right stack. 4. Bar Chart: Chart.js (Goal: Compare) -> Visually proves the ROI of automation. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
-let numeroSemana = 'Sabádo';let numeroSemana2 = 'Domingo';
+    <header class="bg-stone-900 text-stone-50 py-8 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight">Arquitetura de Automação: Barbearias ✂️</h1>
+                    <p class="mt-2 text-stone-400 max-w-2xl">
+                        Estratégia completa de ponta a ponta: do clique no Instagram até a reserva sincronizada na agenda pessoal do cliente no celular.
+                    </p>
+                </div>
+                <div class="hidden md:block text-4xl">📱 🔄 📅</div>
+            </div>
+        </div>
+    </header>
 
-console.log(numeroSemana);console.log(numeroSemana2);
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
 
-let chute = prompt ('Qual o dia da semana?');
+        <section class="bg-white rounded-xl shadow-sm p-6 border border-stone-200">
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold text-stone-800">O Fluxo do Cliente Perfeito</h2>
+                <p class="text-stone-500 text-sm mt-1">Como o cliente navega das redes sociais até o momento em que o horário é salvo no celular dele. Clique nas etapas para detalhes.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-7 gap-2 text-center items-center">
+                <div class="bg-stone-50 p-4 rounded-lg border border-stone-200 cursor-pointer step-card" onclick="openTab('tab-captacao')">
+                    <div class="text-2xl mb-2">📸</div>
+                    <div class="font-semibold text-sm">1. Captação</div>
+                    <div class="text-xs text-stone-500 mt-1">Instagram/Ads</div>
+                </div>
+                
+                <div class="flow-arrow hidden md:flex">➔</div>
+                <div class="flow-arrow flex md:hidden rotate-90 my-2">➔</div>
 
-//Se a resposta for "Sábado" ou "Domingo", mostre "Bom fim de semana!". 
-// Caso contrário, mostre "Boa semana!".
+                <div class="bg-stone-50 p-4 rounded-lg border border-stone-200 cursor-pointer step-card" onclick="openTab('tab-triagem')">
+                    <div class="text-2xl mb-2">🤖</div>
+                    <div class="font-semibold text-sm">2. Triagem</div>
+                    <div class="text-xs text-stone-500 mt-1">Chatbot WhatsApp</div>
+                </div>
 
-if(chute==numeroSemana || chute==numeroSemana2) {alert('Bom fim de semana!')
+                <div class="flow-arrow hidden md:flex">➔</div>
+                <div class="flow-arrow flex md:hidden rotate-90 my-2">➔</div>
 
-} else{
-    alert('Boa semana!')
-}
+                <div class="bg-amber-50 p-4 rounded-lg border border-amber-200 cursor-pointer step-card shadow-sm" onclick="openTab('tab-agendamento')">
+                    <div class="text-2xl mb-2">🕒</div>
+                    <div class="font-semibold text-sm text-amber-800">3. Disponibilidade</div>
+                    <div class="text-xs text-amber-600 mt-1">Exibição de Horários</div>
+                </div>
+
+                <div class="flow-arrow hidden md:flex">➔</div>
+                <div class="flow-arrow flex md:hidden rotate-90 my-2">➔</div>
+
+                <div class="bg-amber-50 p-4 rounded-lg border border-amber-200 cursor-pointer step-card shadow-sm" onclick="openTab('tab-calendario')">
+                    <div class="text-2xl mb-2">📅</div>
+                    <div class="font-semibold text-sm text-amber-800">4. Sincronização</div>
+                    <div class="text-xs text-amber-600 mt-1">Salvar no Celular</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+            <div class="border-b border-stone-200 bg-stone-50 flex overflow-x-auto">
+                <button class="px-6 py-4 text-sm font-medium text-stone-500 hover:text-stone-800 focus:outline-none whitespace-nowrap tab-btn active-tab" onclick="switchTab(event, 'tab-captacao')">1. Captação (IG)</button>
+                <button class="px-6 py-4 text-sm font-medium text-stone-500 hover:text-stone-800 focus:outline-none whitespace-nowrap tab-btn" onclick="switchTab(event, 'tab-triagem')">2. Triagem (WA)</button>
+                <button class="px-6 py-4 text-sm font-medium text-stone-500 hover:text-stone-800 focus:outline-none whitespace-nowrap tab-btn" onclick="switchTab(event, 'tab-agendamento')">3. Disponibilidade (Foco)</button>
+                <button class="px-6 py-4 text-sm font-medium text-stone-500 hover:text-stone-800 focus:outline-none whitespace-nowrap tab-btn" onclick="switchTab(event, 'tab-calendario')">4. Agenda Celular (Foco)</button>
+            </div>
+
+            <div class="p-6 md:p-8 min-h-[300px]">
+                
+                <div id="tab-captacao" class="tab-content block">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-4">A Porta de Entrada: Instagram</h3>
+                    <p class="text-stone-600 mb-4">O objetivo aqui é transformar o seguidor ou visitante do perfil em um contato no WhatsApp sem fricção.</p>
+                    <ul class="space-y-3 text-sm text-stone-700">
+                        <li class="flex items-start"><span class="text-amber-500 mr-2">✓</span> <strong>Link na Bio:</strong> Utilize ferramentas como Linktree ou um site próprio, mas o botão principal deve ser um link direto para o WhatsApp (wa.me) com uma mensagem pré-definida (ex: "Olá, vim do Instagram e quero agendar!").</li>
+                        <li class="flex items-start"><span class="text-amber-500 mr-2">✓</span> <strong>Automação de DM (Direct):</strong> Use o ManyChat para configurar respostas automáticas. Se alguém comenta "AGENDAR" num Reels ou manda no direct, o bot responde automaticamente enviando o link do WhatsApp ou iniciando o agendamento ali mesmo.</li>
+                        <li class="flex items-start"><span class="text-amber-500 mr-2">✓</span> <strong>Anúncios de Clique para WhatsApp:</strong> Campanhas no Gerenciador de Anúncios da Meta direcionando o público local diretamente para o seu WhatsApp Business.</li>
+                    </ul>
+                </div>
+
+                <div id="tab-triagem" class="tab-content hidden">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-4">O Robô Recepcionista: WhatsApp</h3>
+                    <p class="text-stone-600 mb-4">Quando o cliente envia a primeira mensagem, um fluxo automatizado deve assumir instantaneamente.</p>
+                    <div class="bg-stone-100 p-4 rounded-lg font-mono text-sm mb-4 border border-stone-200">
+                        <div class="text-stone-500 mb-1">Cliente: "Olá, quero agendar um horário."</div>
+                        <div class="text-emerald-700 mb-1">Robô: "Fala, campeão! ✂️ Bem-vindo à Barbearia X. Sou o assistente virtual. O que você deseja hoje?"</div>
+                        <div class="ml-4 text-emerald-700">1️⃣ Agendar Horário</div>
+                        <div class="ml-4 text-emerald-700">2️⃣ Ver Tabela de Preços</div>
+                        <div class="ml-4 text-emerald-700">3️⃣ Falar com um humano</div>
+                    </div>
+                    <p class="text-sm text-stone-600">Ferramentas sugeridas: <strong>Typebot</strong> (mais flexível e barato) ou <strong>ManyChat/Chattigo</strong>. O robô filtra a intenção e guia o cliente para o próximo passo sem precisar do barbeiro parar o que está fazendo.</p>
+                </div>
+
+                <div id="tab-agendamento" class="tab-content hidden">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-4">Disponibilizando os Horários (Seu Foco)</h3>
+                    <p class="text-stone-600 mb-4">A pior experiência é trocar 10 mensagens negociando horário ("Tem quinta às 14h?", "Não, só 15h"). A automação resolve isso integrando um calendário em tempo real.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div class="border border-stone-200 rounded-lg p-5">
+                            <h4 class="font-semibold text-stone-800 mb-2">Método 1: Sistema de Agendamento Externo</h4>
+                            <p class="text-sm text-stone-600 mb-3">O robô do WhatsApp envia um link único. O cliente clica, abre uma página web rápida, vê os horários disponíveis, escolhe e confirma.</p>
+                            <p class="text-sm font-medium text-stone-800">Melhores opções:</p>
+                            <ul class="text-sm text-stone-600 list-disc pl-5 mt-1">
+                                <li><strong>Calendly:</strong> Muito fácil de usar, integração robusta.</li>
+                                <li><strong>AppBarber / Trinks:</strong> Específicos para salões, gerenciam também comissões e pagamentos.</li>
+                                <li><strong>Zcal:</strong> Alternativa gratuita e moderna ao Calendly.</li>
+                            </ul>
+                        </div>
+                        <div class="border border-amber-200 bg-amber-50 rounded-lg p-5">
+                            <h4 class="font-semibold text-stone-800 mb-2">Método 2: Agendamento Nativo no WhatsApp (Avançado)</h4>
+                            <p class="text-sm text-stone-600 mb-3">Usando a API Oficial do WhatsApp e ferramentas como Typebot conectadas via API (Make/Integromat) a um Google Calendar.</p>
+                            <p class="text-sm text-stone-600 mb-3">O robô busca os horários livres no Google Calendar e exibe como uma lista de botões no próprio WhatsApp.</p>
+                            <div class="bg-white p-2 rounded text-xs font-mono border border-stone-200">
+                                Robô: "Tenho estes horários amanhã para o João:"<br>
+                                [ 14:00 ] [ 15:30 ] [ 17:00 ]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-calendario" class="tab-content hidden">
+                    <h3 class="text-2xl font-bold text-amber-700 mb-4">A Mágica: Salvar na Agenda do Cliente</h3>
+                    <p class="text-stone-600 mb-4">Para garantir que ele não esqueça, após a confirmação do horário, o robô envia uma mensagem permitindo adicionar o evento no calendário do celular (iOS ou Android) com um clique.</p>
+                    
+                    <div class="bg-stone-50 border-l-4 border-amber-500 p-5 rounded-r-lg mb-6">
+                        <h4 class="font-semibold text-stone-800 mb-3">Como implementar isso na prática:</h4>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <strong class="text-sm text-stone-800">Opção A: Link Dinâmico do Google Calendar (Mais fácil)</strong>
+                                <p class="text-xs text-stone-600 mt-1">Após o sistema confirmar o agendamento (ex: dia 10 às 14h), seu fluxo no Typebot ou Make gera uma URL formatada e envia no chat.</p>
+                                <div class="bg-stone-800 text-stone-300 p-2 rounded mt-2 text-xs overflow-x-auto whitespace-nowrap">
+                                    https://calendar.google.com/calendar/render?action=TEMPLATE&text=Corte+Barbearia&dates=20260410T140000Z/20260410T150000Z
+                                </div>
+                                <p class="text-xs text-stone-500 mt-1">Quando o cliente clica, abre o Google Calendar no celular já com tudo preenchido.</p>
+                            </div>
+
+                            <hr class="border-stone-200">
+
+                            <div>
+                                <strong class="text-sm text-stone-800">Opção B: Envio de Arquivo .ICS (Mais profissional)</strong>
+                                <p class="text-xs text-stone-600 mt-1">Usando plataformas de automação (Make/Zapier), você gera um arquivo <code>invite.ics</code> no momento da marcação. O robô do WhatsApp envia esse arquivo como documento.</p>
+                                <p class="text-xs text-stone-600 mt-1">O iPhone e o Android reconhecem arquivos .ics nativamente. Ao clicar no arquivo no WhatsApp, o celular abre um pop-up: "Adicionar ao Calendário?".</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-stone-200 rounded p-4 max-w-sm bg-white shadow-sm mx-auto">
+                        <div class="text-xs text-stone-400 mb-2 text-center">Visão do Cliente no WhatsApp</div>
+                        <div class="bg-emerald-100 p-3 rounded-lg rounded-tr-none text-sm text-stone-800 ml-auto w-11/12 mb-2">
+                            Tudo certo! 🎉 Seu corte com o João está marcado para Sexta, às 14:00.<br><br>
+                            Para não esquecer, clique no link abaixo para salvar na agenda do seu celular:
+                        </div>
+                        <div class="bg-amber-100 border border-amber-200 p-2 rounded text-center text-amber-800 font-semibold text-sm cursor-pointer hover:bg-amber-200 transition-colors">
+                            📅 Adicionar ao meu Calendário
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 bg-white rounded-xl shadow-sm border border-stone-200 p-6 flex flex-col">
+                <h3 class="text-lg font-semibold text-stone-800 mb-4">Stack Tecnológico Recomendado</h3>
+                <p class="text-sm text-stone-500 mb-6">Selecione uma ferramenta para ver sua função no ecossistema.</p>
+                
+                <div class="flex flex-col space-y-2 flex-grow">
+                    <button class="tool-btn bg-stone-100 hover:bg-stone-200 text-left px-4 py-3 rounded-lg font-medium text-sm border border-stone-200 transition-colors" onclick="showTool('typebot', this)">Typebot + Evolution API</button>
+                    <button class="tool-btn bg-stone-100 hover:bg-stone-200 text-left px-4 py-3 rounded-lg font-medium text-sm border border-stone-200 transition-colors" onclick="showTool('calendly', this)">Calendly</button>
+                    <button class="tool-btn bg-stone-100 hover:bg-stone-200 text-left px-4 py-3 rounded-lg font-medium text-sm border border-stone-200 transition-colors" onclick="showTool('make', this)">Make (antigo Integromat)</button>
+                </div>
+
+                <div id="tool-description" class="mt-6 bg-stone-50 p-4 rounded-lg border border-stone-200 min-h-[120px]">
+                    <div class="text-sm text-stone-700">Clique em uma ferramenta acima para entender seu papel na automação da sua barbearia.</div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-stone-200 p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-stone-800">Impacto da Automação</h3>
+                        <p class="text-sm text-stone-500">Comparativo: Processo Manual vs. Fluxo Automatizado com Calendário</p>
+                    </div>
+                    <select id="metricSelector" class="bg-stone-50 border border-stone-300 text-stone-900 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block p-2.5" onchange="updateChart()">
+                        <option value="noshow">Taxa de Não Comparecimento (No-show)</option>
+                        <option value="time">Tempo Gasto Agendando (Horas/Mês)</option>
+                        <option value="bookings">Agendamentos Realizados Fora do Expediente</option>
+                    </select>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="impactChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function openTab(tabId) {
+            const btns = document.querySelectorAll('.tab-btn');
+            btns.forEach(btn => {
+                if(btn.innerText.toLowerCase().includes(tabId.split('-')[1].substring(0,4))) {
+                    btn.click();
+                }
+            });
+        }
+
+        function switchTab(event, tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('active-tab');
+                el.classList.add('border-transparent');
+            });
+            
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById(tabId).classList.add('block');
+            
+            event.currentTarget.classList.add('active-tab');
+            event.currentTarget.classList.remove('border-transparent');
+        }
+
+        const toolData = {
+            'typebot': {
+                title: 'Typebot (Interface de Chatbot)',
+                desc: 'Construtor visual de fluxos de conversa. Muito mais barato que ferramentas tradicionais. Aqui você desenha as perguntas: "Qual serviço?", "Qual barbeiro?". Ele se conecta ao WhatsApp via Evolution API ou Baileys.'
+            },
+            'calendly': {
+                title: 'Calendly (Motor de Agenda)',
+                desc: 'Gerencia as regras de negócio: Quais horários o barbeiro trabalha, intervalo para almoço, e impede conflitos (duas pessoas no mesmo horário). Gera o link de disponibilidade perfeitamente adaptado para celular.'
+            },
+            'make': {
+                title: 'Make (A Ponte / O Cérebro)',
+                desc: 'Ferramenta de integração. Ele "escuta" quando um horário é marcado no Calendly, cria o arquivo .ICS (convite de calendário) e manda a ordem de volta pro Typebot disparar a mensagem final no WhatsApp do cliente.'
+            }
+        };
+
+        function showTool(toolKey, element) {
+            document.querySelectorAll('.tool-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-100', 'border-amber-400', 'text-amber-900');
+                btn.classList.add('bg-stone-100', 'text-stone-800');
+            });
+            
+            element.classList.remove('bg-stone-100', 'text-stone-800');
+            element.classList.add('bg-amber-100', 'border-amber-400', 'text-amber-900');
+
+            const container = document.getElementById('tool-description');
+            container.innerHTML = `
+                <strong class="block text-stone-800 mb-1">${toolData[toolKey].title}</strong>
+                <p class="text-sm text-stone-600">${toolData[toolKey].desc}</p>
+            `;
+        }
+
+        const chartDataSets = {
+            'noshow': {
+                labels: ['Processo Manual', 'Com Lembrete ICS/Google'],
+                data: [25, 4], 
+                label: 'Taxa de Falta (%)',
+                bg: ['#e7e5e4', '#d97706'] 
+            },
+            'time': {
+                labels: ['Processo Manual', 'Automatizado'],
+                data: [45, 2], 
+                label: 'Horas Gastas/Mês no WhatsApp',
+                bg: ['#e7e5e4', '#059669'] 
+            },
+            'bookings': {
+                labels: ['Processo Manual', 'Automatizado (Bot 24/7)'],
+                data: [0, 35], 
+                label: '% de Agendamentos Feitos de Madrugada/Domingo',
+                bg: ['#e7e5e4', '#4f46e5'] 
+            }
+        };
+
+        let impactChartInstance = null;
+
+        function updateChart() {
+            const selector = document.getElementById('metricSelector');
+            const selectedMetric = selector.value;
+            const dataConfig = chartDataSets[selectedMetric];
+
+            const ctx = document.getElementById('impactChart').getContext('2d');
+
+            if (impactChartInstance) {
+                impactChartInstance.destroy();
+            }
+
+            impactChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dataConfig.labels,
+                    datasets: [{
+                        label: dataConfig.label,
+                        data: dataConfig.data,
+                        backgroundColor: dataConfig.bg,
+                        borderRadius: 6,
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#292524',
+                            titleFont: { family: 'Inter', size: 13 },
+                            bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
+                            padding: 12,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + (selectedMetric !== 'time' ? '%' : ' horas');
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e7e5e4', drawBorder: false },
+                            ticks: { font: { family: 'Inter' } }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: 'Inter', weight: '600' } }
+                        }
+                    }
+                }
+            });
+        }
+
+        window.onload = function() {
+            updateChart();
+        };
+
+    </script>
+</body>
+</html>
