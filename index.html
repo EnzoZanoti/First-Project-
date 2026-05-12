@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard: Automação de Captação e Agendamento para Barbearias</title>
+    <title>Dashboard: Automação de Captação e Agendamento para Pequenas Empresas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -16,7 +16,7 @@
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
+            max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
             height: 300px;
@@ -59,7 +59,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-3xl font-bold tracking-tight">Arquitetura de Automação: Barbearias ✂️</h1>
+                    <h1 class="text-3xl font-bold tracking-tight">Arquitetura de Automação</h1>
                     <p class="mt-2 text-stone-400 max-w-2xl">
                         Estratégia completa de ponta a ponta: do clique no Instagram até a reserva sincronizada na agenda pessoal do cliente no celular.
                     </p>
@@ -124,11 +124,11 @@
             <div class="p-6 md:p-8 min-h-[300px]">
                 
                 <div id="tab-captacao" class="tab-content block">
-                    <h3 class="text-2xl font-bold text-stone-800 mb-4">A Porta de Entrada: Instagram</h3>
+                    <h3 class="text-2xl font-bold text-stone-800 mb-4">A Porta de Entrada: Instagram/Facebook</h3>
                     <p class="text-stone-600 mb-4">O objetivo aqui é transformar o seguidor ou visitante do perfil em um contato no WhatsApp sem fricção.</p>
                     <ul class="space-y-3 text-sm text-stone-700">
-                        <li class="flex items-start"><span class="text-amber-500 mr-2">✓</span> <strong>Link na Bio:</strong> Utilize ferramentas como Linktree ou um site próprio, mas o botão principal deve ser um link direto para o WhatsApp (wa.me) com uma mensagem pré-definida (ex: "Olá, vim do Instagram e quero agendar!").</li>
-                        <li class="flex items-start"><span class="text-amber-500 mr-2">✓</span> <strong>Automação de DM (Direct):</strong> Use o ManyChat para configurar respostas automáticas. Se alguém comenta "AGENDAR" num Reels ou manda no direct, o bot responde automaticamente enviando o link do WhatsApp ou iniciando o agendamento ali mesmo.</li>
+                        <li class="flex items-start"><span class="text-amber-500 mr-2">✓</span> <strong>Link na Bio:</strong> Faremos a adição do botão principal an sua Bio, o qual deve ser um link direto para o WhatsApp (wa.me) com uma mensagem pré-definida (ex: "Olá, vim do Instagram e quero agendar!").</li>
+                        <li class="flex items-start"><span class="text-amber-500 mr-2">✓</span> <strong>Automação de DM (Direct):</strong> Se alguém comenta "AGENDAR" num Reels ou manda no direct, o bot responde automaticamente enviando o link do WhatsApp ou iniciando o agendamento ali mesmo.</li>
                         <li class="flex items-start"><span class="text-amber-500 mr-2">✓</span> <strong>Anúncios de Clique para WhatsApp:</strong> Campanhas no Gerenciador de Anúncios da Meta direcionando o público local diretamente para o seu WhatsApp Business.</li>
                     </ul>
                 </div>
@@ -143,7 +143,6 @@
                         <div class="ml-4 text-emerald-700">2️⃣ Ver Tabela de Preços</div>
                         <div class="ml-4 text-emerald-700">3️⃣ Falar com um humano</div>
                     </div>
-                    <p class="text-sm text-stone-600">Ferramentas sugeridas: <strong>Typebot</strong> (mais flexível e barato) ou <strong>ManyChat/Chattigo</strong>. O robô filtra a intenção e guia o cliente para o próximo passo sem precisar do barbeiro parar o que está fazendo.</p>
                 </div>
 
                 <div id="tab-agendamento" class="tab-content hidden">
@@ -152,7 +151,8 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                         <div class="border border-stone-200 rounded-lg p-5">
-                            <h4 class="font-semibold text-stone-800 mb-2">Método 1: Sistema de Agendamento Externo</h4>
+                            <h4 class="font-semibold text-red-500 mb-2">O que a concorrência geralmente utiliza:</h4>
+                            <h4 class="font-semibold text-red-500 mb-2"> Sistema de Agendamento Externo</h4>
                             <p class="text-sm text-stone-600 mb-3">O robô do WhatsApp envia um link único. O cliente clica, abre uma página web rápida, vê os horários disponíveis, escolhe e confirma.</p>
                             <p class="text-sm font-medium text-stone-800">Melhores opções:</p>
                             <ul class="text-sm text-stone-600 list-disc pl-5 mt-1">
@@ -162,7 +162,7 @@
                             </ul>
                         </div>
                         <div class="border border-amber-200 bg-amber-50 rounded-lg p-5">
-                            <h4 class="font-semibold text-stone-800 mb-2">Método 2: Agendamento Nativo no WhatsApp (Avançado)</h4>
+                            <h4 class="font-semibold text-stone-800 mb-2">Agendamento Nativo no WhatsApp (Avançado)</h4>
                             <p class="text-sm text-stone-600 mb-3">Usando a API Oficial do WhatsApp e ferramentas como Typebot conectadas via API (Make/Integromat) a um Google Calendar.</p>
                             <p class="text-sm text-stone-600 mb-3">O robô busca os horários livres no Google Calendar e exibe como uma lista de botões no próprio WhatsApp.</p>
                             <div class="bg-white p-2 rounded text-xs font-mono border border-stone-200">
@@ -183,7 +183,7 @@
                         <div class="space-y-4">
                             <div>
                                 <strong class="text-sm text-stone-800">Opção A: Link Dinâmico do Google Calendar (Mais fácil)</strong>
-                                <p class="text-xs text-stone-600 mt-1">Após o sistema confirmar o agendamento (ex: dia 10 às 14h), seu fluxo no Typebot ou Make gera uma URL formatada e envia no chat.</p>
+                                <p class="text-xs text-stone-600 mt-1">Após o sistema confirmar o agendamento (ex: dia 10 às 14h), o fluxo que desenvolvemos gera uma URL formatada e envia no chat.</p>
                                 <div class="bg-stone-800 text-stone-300 p-2 rounded mt-2 text-xs overflow-x-auto whitespace-nowrap">
                                     https://calendar.google.com/calendar/render?action=TEMPLATE&text=Corte+Barbearia&dates=20260410T140000Z/20260410T150000Z
                                 </div>
@@ -194,7 +194,7 @@
 
                             <div>
                                 <strong class="text-sm text-stone-800">Opção B: Envio de Arquivo .ICS (Mais profissional)</strong>
-                                <p class="text-xs text-stone-600 mt-1">Usando plataformas de automação (Make/Zapier), você gera um arquivo <code>invite.ics</code> no momento da marcação. O robô do WhatsApp envia esse arquivo como documento.</p>
+                                <p class="text-xs text-stone-600 mt-1">Usando plataformas de automação, você gera um arquivo <code>invite.ics</code> no momento da marcação. O robô do WhatsApp envia esse arquivo como documento.</p>
                                 <p class="text-xs text-stone-600 mt-1">O iPhone e o Android reconhecem arquivos .ics nativamente. Ao clicar no arquivo no WhatsApp, o celular abre um pop-up: "Adicionar ao Calendário?".</p>
                             </div>
                         </div>
@@ -215,21 +215,7 @@
             </div>
         </section>
 
-        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-1 bg-white rounded-xl shadow-sm border border-stone-200 p-6 flex flex-col">
-                <h3 class="text-lg font-semibold text-stone-800 mb-4">Stack Tecnológico Recomendado</h3>
-                <p class="text-sm text-stone-500 mb-6">Selecione uma ferramenta para ver sua função no ecossistema.</p>
-                
-                <div class="flex flex-col space-y-2 flex-grow">
-                    <button class="tool-btn bg-stone-100 hover:bg-stone-200 text-left px-4 py-3 rounded-lg font-medium text-sm border border-stone-200 transition-colors" onclick="showTool('typebot', this)">Typebot + Evolution API</button>
-                    <button class="tool-btn bg-stone-100 hover:bg-stone-200 text-left px-4 py-3 rounded-lg font-medium text-sm border border-stone-200 transition-colors" onclick="showTool('calendly', this)">Calendly</button>
-                    <button class="tool-btn bg-stone-100 hover:bg-stone-200 text-left px-4 py-3 rounded-lg font-medium text-sm border border-stone-200 transition-colors" onclick="showTool('make', this)">Make (antigo Integromat)</button>
-                </div>
-
-                <div id="tool-description" class="mt-6 bg-stone-50 p-4 rounded-lg border border-stone-200 min-h-[120px]">
-                    <div class="text-sm text-stone-700">Clique em uma ferramenta acima para entender seu papel na automação da sua barbearia.</div>
-                </div>
-            </div>
+        <section class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
 
             <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-stone-200 p-6">
                 <div class="flex justify-between items-center mb-6">
@@ -237,7 +223,7 @@
                         <h3 class="text-lg font-semibold text-stone-800">Impacto da Automação</h3>
                         <p class="text-sm text-stone-500">Comparativo: Processo Manual vs. Fluxo Automatizado com Calendário</p>
                     </div>
-                    <select id="metricSelector" class="bg-stone-50 border border-stone-300 text-stone-900 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block p-2.5" onchange="updateChart()">
+                    <select id="metricSelector" class="w-full md:w-auto p-3 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 font-medium text-stone-700 transition-colors cursor-pointer" onchange="updateChart()">
                         <option value="noshow">Taxa de Não Comparecimento (No-show)</option>
                         <option value="time">Tempo Gasto Agendando (Horas/Mês)</option>
                         <option value="bookings">Agendamentos Realizados Fora do Expediente</option>
@@ -248,6 +234,25 @@
                     <canvas id="impactChart"></canvas>
                 </div>
             </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-stone-200 p-6">
+                <div>
+                        <h3 class="text-2xl font-bold text-stone-800 mb-4">Prosposta Comercial</h3>
+                </div>
+                <div id="tab-captacao" class="tab-content block">
+                    <h3 class="text-lg font-semibold text-stone-800">Falando da Proposta</h3>
+                    <p class="text-stone-600 mb-4">Essa é uma aposta no futuro para uma maior otimização do seu tempo e do seu alcance de captação de clientes.</p>
+                    <ul class="space-y-3 text-sm text-stone-700">
+                        <li class="flex items-start"> <strong>1º Para fazer a implementação serão necessários de imediato:</strong> R$ 332,34 (Assinatura das Plataformas que possibilitam a automatização).</li>
+                        <li class="flex items-start"> <strong>2º Preço mensal das plataformas:</strong> R$ 252,34 + Preço dos meus serviços de implementação: R$ 299,99 (parcelamento em até 6x sem juros)</li>
+                        <li class="flex items-start text-red-500 mb-2"> <strong>Condição especial: </strong> Campanhas no Gerenciador de Anúncios da Meta direcionando o público local diretamente para o seu WhatsApp Business.</li>
+                    </ul>
+                </div>
+            </div>
+
         </section>
 
     </main>
